@@ -14,10 +14,10 @@ function getData(id) {
       var samplevalues = samples.sample_values.slice(0, 10)
         .reverse();
 
-      // get top 10 otu ids for plot OTU
+      // top 10 otu ids for plot OTU
       var OTU_top = (samples.otu_ids.slice(0, 10));
       
-      // map top 10 and add OTU to id for y-axis
+      // map top 10 and add "OTU" to id for y-axis
       var OTU_id = OTU_top.map(d => "OTU " + d)
 
       // label top 10 otu for chart
@@ -80,6 +80,7 @@ function getData(id) {
     });
 }  
 
+// 4. Display the sample metadata, i.e., an individual's demographic information.
 // Get data for Demographics chart
 function getMetadata(id) {
   // read the json file to get data
@@ -99,12 +100,12 @@ function getMetadata(id) {
 
       // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
       Object.entries(result).forEach(function(key) {   
-              demographicInfo.append("h5").text(key[0] + ": " + key[1]);    
+              demographicInfo.append("h6").text(key[0] + ": " + key[1]);    
       });
   });
 }
 
-// change event
+// change event using id
 function optionChanged(id) {
   getData(id);
   getMetadata(id);
@@ -112,7 +113,7 @@ function optionChanged(id) {
 
 // function init for data
 function init() {
-  // selecting the dropdown menu 
+  // select dropdown menu 
   var dropdown = d3.select("#selDataset");
 
   // read the data 
@@ -124,7 +125,7 @@ function init() {
           dropdown.append("option").text(name).property("value");
       });
 
-      // call the functions to display the data and the plots to the page
+      // functions to display the data and plot to page
       getData(data.names[0]);
       getMetadata(data.names[0]);
   });
